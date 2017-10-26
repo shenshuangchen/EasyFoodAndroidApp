@@ -19,8 +19,7 @@ import org.json.JSONException;
 public class NutritionActivity extends AppCompatActivity {
     protected NutritionView nutritionView;
     protected JSONArray info;
-    protected String calories, carbs, protein, fat;
-
+    protected Nutrition ntr = new Nutrition();
     protected EditText editText_calories;
     protected EditText editText_carbs;
     protected EditText editText_protein;
@@ -47,16 +46,10 @@ public class NutritionActivity extends AppCompatActivity {
                     } else {
                         info = new JSONArray(s);
                     }
-                    editText_calories = (EditText) findViewById(R.id.calories);
-                    editText_carbs = (EditText) findViewById(R.id.carbs);
-                    editText_protein = (EditText) findViewById(R.id.protein);
-                    editText_fat = (EditText) findViewById(R.id.fat);
-
+                    getEditTexts();
                     editText_calories.setText((String) info.get(0));
-
                     editText_carbs.setText((String) info.get(1));
                     editText_protein.setText((String) info.get(2));
-
                     editText_fat.setText((String) info.get(3));
 
 
@@ -74,37 +67,40 @@ public class NutritionActivity extends AppCompatActivity {
 
     }
 
+    protected void getEditTexts(){
+        editText_calories = (EditText) findViewById(R.id.calories);
+        editText_carbs = (EditText) findViewById(R.id.carbs);
+        editText_protein = (EditText) findViewById(R.id.protein);
+        editText_fat = (EditText) findViewById(R.id.fat);
+    }
+
+    protected void setNutritions(){
+        getEditTexts();
+        ntr.setCalories(editText_calories.getText().toString());
+        ntr.setCarbs(editText_carbs.getText().toString());
+        ntr.setProtein(editText_protein.getText().toString());
+        ntr.setFat(editText_fat.getText().toString());
+    }
+
     protected void onClick(View view) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myref_nutrition = database.getReference("nutrition");
 
         //Toast.makeText(NutritionActivity.this, "hit button", Toast.LENGTH_SHORT).show();
         if (view.getId() == R.id.Save) {
-
-            editText_calories = (EditText) findViewById(R.id.calories);
-            calories = editText_calories.getText().toString();
-
-            editText_carbs = (EditText) findViewById(R.id.carbs);
-            carbs = editText_carbs.getText().toString();
-
-            editText_protein = (EditText) findViewById(R.id.protein);
-            protein = editText_protein.getText().toString();
-
-            editText_fat = (EditText) findViewById(R.id.fat);
-            fat = editText_fat.getText().toString();
-
-            if (carbs.equals("")) carbs = "0";
-            if (protein.equals("")) protein = "0";
-            if (fat.equals("")) fat = "0";
+            setNutritions();
+            if (ntr.getCarbs().equals("")) ntr.setCarbs("0");
+            if (ntr.getProtein().equals("")) ntr.setProtein("0");
+            if (ntr.getFat().equals("")) ntr.setFat("0");
 
 
-            if (Integer.parseInt(carbs) + Integer.parseInt(protein) + Integer.parseInt(fat) == 100) {
+            if (Integer.parseInt(ntr.getCarbs()) + Integer.parseInt(ntr.getProtein()) + Integer.parseInt(ntr.getFat()) == 100) {
 
                 try {
-                    info.put(0, calories);
-                    info.put(1, carbs);
-                    info.put(2, protein);
-                    info.put(3, fat);
+                    info.put(0, ntr.getCalories());
+                    info.put(1, ntr.getCarbs());
+                    info.put(2, ntr.getProtein());
+                    info.put(3, ntr.getFat());
                     myref_nutrition.setValue(info.toString());
                     Toast.makeText(nutritionView.getContext(),
                             "Saved", Toast.LENGTH_SHORT).show();
