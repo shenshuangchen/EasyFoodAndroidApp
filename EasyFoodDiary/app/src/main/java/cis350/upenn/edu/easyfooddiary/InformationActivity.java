@@ -21,18 +21,31 @@ import java.text.ParseException;
 public class InformationActivity extends AppCompatActivity {
 
     protected InformationView informationView;
-    protected String namer;
+    /*protected String namer;
     protected String birthdate;
     protected String eGoal;
     protected String wGoal;
-    protected String mGoal;
-    protected EditText editText_name;
+    protected String mGoal;*/
+    protected String [] strArray = new String[5];
+    /*protected EditText editText_name;
     protected EditText editText_date;
     protected EditText editText_egoal;
     protected EditText editText_wgoal;
-    protected EditText editText_mgoal;
-
-
+    protected EditText editText_mgoal;*/
+    //Added Variables!
+    static int index = 0;
+    protected EditText[] et_array = new EditText[5];
+    protected DatabaseReference[] dbr = new DatabaseReference[5];
+    protected String[] refName = new String[5];
+    /////////////////////////////////////
+    protected void initRefName(){
+        refName[0] = "name";
+        refName[1] = "date";
+        refName[2] = "egoal";
+        refName[3] = "wgoal";
+        refName[4] = "mgoal";
+    }
+    ////////////////////////////////////
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +54,12 @@ public class InformationActivity extends AppCompatActivity {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-        DatabaseReference myref_name = database.getReference("name");
+        //Modified Part!
+        initRefName();
+        reference(database);
+
+
+        /*DatabaseReference myref_name = database.getReference("name");
         myref_name.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -129,24 +147,66 @@ public class InformationActivity extends AppCompatActivity {
                 // Failed to read value
                 Log.w("tag", "Failed to read value.", error.toException());
             }
-        });
+        });*/
 
     }
+    ////////////////////////////////////////////////////
+    private void findEditTextId(){
+        et_array[0] = (EditText) findViewById(R.id.Name);
+        et_array[1] = (EditText) findViewById(R.id.Date);
+        et_array[2] = (EditText) findViewById(R.id.eGoal);
+        et_array[3] = (EditText) findViewById(R.id.wGoal);
+        et_array[4] = (EditText) findViewById(R.id.mGoal);
+    }
 
+    private void reference(FirebaseDatabase database){
+        findEditTextId();
+        for(int i = 0;i < 5;i++){
+            dbr[i] = database.getReference(refName[i]);
+            index = i;
+            dbr[i].addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    // This method is called once with the initial value and again
+                    // whenever data at this location is updated
+                    String value = dataSnapshot.getValue(String.class);
+                    //et_array[index] = (EditText) findViewById(R.id.Name);
+                    et_array[index].setText(value);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    // Failed to read value
+                    Log.w("tag", "Failed to read value.", error.toException());
+                }
+            });
+
+        }
+    }
+    /////////////////////////////////////////////////
     protected void onClick(View view) {
         if (view.getId() == R.id.main) {
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
         } else {
             FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference myref_name = database.getReference("name");
+            /*DatabaseReference myref_name = database.getReference("name");
             DatabaseReference myref_date = database.getReference("date");
             DatabaseReference myref_egoal = database.getReference("egoal");
             DatabaseReference myref_wgoal = database.getReference("wgoal");
-            DatabaseReference myref_mgoal = database.getReference("mgoal");
+            DatabaseReference myref_mgoal = database.getReference("mgoal");*/
+
+            for(int i = 0;i < 5;i++){
+                dbr[i] = database.getReference(refName[i]);
+            }
 
             Log.v("Setting name", "done");
-            editText_name = (EditText) findViewById(R.id.Name);
+
+            findEditTextId();
+            for(int i = 0;i < 5;i++){
+                strArray[i] = et_array[i].getText().toString();
+            }
+            /*editText_name = (EditText) findViewById(R.id.Name);
             namer = editText_name.getText().toString();
 
             editText_date = (EditText) findViewById(R.id.Date);
@@ -159,16 +219,20 @@ public class InformationActivity extends AppCompatActivity {
             wGoal = editText_wgoal.getText().toString();
 
             editText_mgoal = (EditText) findViewById(R.id.mGoal);
-            mGoal = editText_mgoal.getText().toString();
+            mGoal = editText_mgoal.getText().toString();*/
 
             DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
             try {
-                df.parse(birthdate);
+                /*df.parse(birthdate);
                 myref_name.setValue(namer);
                 myref_date.setValue(birthdate);
                 myref_egoal.setValue(eGoal);
                 myref_wgoal.setValue(wGoal);
-                myref_mgoal.setValue(mGoal);
+                myref_mgoal.setValue(mGoal);*/
+
+                df.parse(strArray[1]);
+                for(int i = 0;i < 5;i++)
+                    dbr[i].setValue(strArray[i]);
 
 
                 Toast.makeText(informationView.getContext(),

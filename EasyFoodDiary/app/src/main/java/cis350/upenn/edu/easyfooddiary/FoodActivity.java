@@ -28,23 +28,43 @@ public class FoodActivity extends AppCompatActivity {
     protected String date;
     protected String monthyear;
     protected JSONArray dateInfo;
-    protected String weight, breakfast, lunch, dinner, snack1, snack2, snack3;
-    protected String breakfastCalories, lunchCalories, dinnerCalories, snack1Calories, snack2Calories, snack3Calories;
+    //protected String weight, breakfast, lunch, dinner, snack1, snack2, snack3;
+    //protected String breakfastCalories, lunchCalories, dinnerCalories, snack1Calories, snack2Calories, snack3Calories;
+    protected String[] typeStr = new String[7];
+    protected String[] caloriesStr = new String[6];
 
-    protected EditText editText_weight;
+    /*protected EditText editText_weight;
     protected EditText editText_breakfast;
     protected EditText editText_lunch;
     protected EditText editText_dinner;
     protected EditText editText_snack1;
     protected EditText editText_snack2;
-    protected EditText editText_snack3;
+    protected EditText editText_snack3;*/
+    protected EditText[] etType = new EditText[7];
 
-    protected EditText editText_breakfastCalories;
+    /*protected EditText editText_breakfastCalories;
     protected EditText editText_lunchCalories;
     protected EditText editText_dinnerCalories;
     protected EditText editText_snack1Calories;
     protected EditText editText_snack2Calories;
-    protected EditText editText_snack3Calories;
+    protected EditText editText_snack3Calories;*/
+    protected EditText[] etCalories = new EditText[6];
+
+    private void getTypeAndCalorieET(){
+        etType[0] = (EditText) findViewById(R.id.weight);
+        etType[1] = (EditText) findViewById(R.id.breakfast);
+        etType[2] = (EditText) findViewById(R.id.lunch);
+        etType[3] = (EditText) findViewById(R.id.dinner);
+        etType[4] = (EditText) findViewById(R.id.snack1);
+        etType[5] = (EditText) findViewById(R.id.snack2);
+        etType[6] = (EditText) findViewById(R.id.snack3);
+        etCalories[0] = (EditText) findViewById(R.id.breakfastCalories);
+        etCalories[1] = (EditText) findViewById(R.id.lunchCalories);
+        etCalories[2] = (EditText) findViewById(R.id.dinnerCalories);
+        etCalories[3] = (EditText) findViewById(R.id.snack1Calories);
+        etCalories[4] = (EditText) findViewById(R.id.snack2Calories);
+        etCalories[5] = (EditText) findViewById(R.id.snack3Calories);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,22 +89,36 @@ public class FoodActivity extends AppCompatActivity {
                     } else {
                         dateInfo = new JSONArray(s);
                     }
-                    editText_weight = (EditText) findViewById(R.id.weight);
+                    getTypeAndCalorieET();
+                    /*editText_weight = (EditText) findViewById(R.id.weight);
                     editText_breakfast = (EditText) findViewById(R.id.breakfast);
                     editText_lunch = (EditText) findViewById(R.id.lunch);
                     editText_dinner = (EditText) findViewById(R.id.dinner);
                     editText_snack1 = (EditText) findViewById(R.id.snack1);
                     editText_snack2 = (EditText) findViewById(R.id.snack2);
-                    editText_snack3 = (EditText) findViewById(R.id.snack3);
+                    editText_snack3 = (EditText) findViewById(R.id.snack3);*/
 
-                    editText_breakfastCalories = (EditText) findViewById(R.id.breakfastCalories);
+                    /*editText_breakfastCalories = (EditText) findViewById(R.id.breakfastCalories);
                     editText_lunchCalories = (EditText) findViewById(R.id.lunchCalories);
                     editText_dinnerCalories = (EditText) findViewById(R.id.dinnerCalories);
                     editText_snack1Calories = (EditText) findViewById(R.id.snack1Calories);
                     editText_snack2Calories = (EditText) findViewById(R.id.snack2Calories);
-                    editText_snack3Calories = (EditText) findViewById(R.id.snack3Calories);
+                    editText_snack3Calories = (EditText) findViewById(R.id.snack3Calories);*/
 
-                    editText_weight.setText((String) dateInfo.get(0));
+                    etType[0].setText((String) dateInfo.get(0));
+                    int ind = 1;
+                    for(int i = 1;i < 7;i++){
+                        etType[i].setText((String) dateInfo.get(ind));
+                        ind = ind + 2;
+                    }
+
+                    ind = 2;
+                    for(int i = 0;i < 6;i++){
+                        etCalories[i].setText((String) dateInfo.get(ind));
+                        ind = ind + 2;
+                    }
+
+                    /*editText_weight.setText((String) dateInfo.get(0));
 
                     editText_breakfast.setText((String) dateInfo.get(1));
                     editText_breakfastCalories.setText((String) dateInfo.get(2));
@@ -102,7 +136,7 @@ public class FoodActivity extends AppCompatActivity {
                     editText_snack2Calories.setText((String) dateInfo.get(10));
 
                     editText_snack3.setText((String) dateInfo.get(11));
-                    editText_snack3Calories.setText((String) dateInfo.get(12));
+                    editText_snack3Calories.setText((String) dateInfo.get(12));*/
 
                 } catch (JSONException e) {
                     Toast.makeText(FoodActivity.this, "Error1", Toast.LENGTH_SHORT).show();
@@ -122,7 +156,16 @@ public class FoodActivity extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myref_date = database.getReference(date);
 
-        editText_weight = (EditText) findViewById(R.id.weight);
+
+        getTypeAndCalorieET();
+        for(int i = 0;i < 7;i++){
+            typeStr[i] = etType[i].getText().toString();
+        }
+        for(int i = 0;i < 6;i++){
+            caloriesStr[i] = etCalories[i].getText().toString();
+        }
+
+        /*editText_weight = (EditText) findViewById(R.id.weight);
         weight = editText_weight.getText().toString();
 
         editText_breakfast = (EditText) findViewById(R.id.breakfast);
@@ -159,10 +202,21 @@ public class FoodActivity extends AppCompatActivity {
         snack3 = editText_snack3.getText().toString();
 
         editText_snack3Calories = (EditText) findViewById(R.id.snack3Calories);
-        snack3Calories = editText_snack3Calories.getText().toString();
+        snack3Calories = editText_snack3Calories.getText().toString();*/
 
         try {
-            dateInfo.put(0, weight);
+            dateInfo.put(0, typeStr[0]);
+            int ind = 1;
+            for(int i = 1;i < 7;i++){
+                dateInfo.put(ind, typeStr[i]);
+                ind = ind + 2;
+            }
+            ind = 2;
+            for(int i = 0;i < 6;i++){
+                dateInfo.put(ind, caloriesStr[i]);
+                ind = ind + 2;
+            }
+            /*dateInfo.put(0, weight);
             dateInfo.put(1, breakfast);
             dateInfo.put(2, breakfastCalories);
             dateInfo.put(3, lunch);
@@ -174,7 +228,7 @@ public class FoodActivity extends AppCompatActivity {
             dateInfo.put(9, snack2);
             dateInfo.put(10, snack2Calories);
             dateInfo.put(11, snack3);
-            dateInfo.put(12, snack3Calories);
+            dateInfo.put(12, snack3Calories);*/
             myref_date.setValue(dateInfo.toString());
             Toast.makeText(foodView.getContext(),
                     "Saved", Toast.LENGTH_SHORT).show();
