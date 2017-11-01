@@ -33,7 +33,7 @@ public class PieChartActivity extends Activity {
     private String[] xData = {"Carbs", "Protein" , "Fat"};
     PieChart pieChart;
     protected JSONArray info;
-    protected String calories, carbs, protein, fat;
+    protected Nutrition ntr = new Nutrition();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,63 +57,22 @@ public class PieChartActivity extends Activity {
                     } else {
                         info = new JSONArray(s);
                     }
-                    /*calories = (EditText) findViewById(R.id.calories);
-                    carbs = (EditText) findViewById(R.id.carbs);
-                    protein = (EditText) findViewById(R.id.protein);
-                    fat = (EditText) findViewById(R.id.fat);*/
+                    ntr.setCalories((String) info.get(0));
+                    ntr.setCarbs((String) info.get(1));
+                    ntr.setProtein((String) info.get(2));
+                    ntr.setFat((String) info.get(3));
 
-                    calories = ((String) info.get(0));
 
-                    carbs = ((String) info.get(1));
-                    protein = ((String) info.get(2));
-                    fat = ((String) info.get(3));
+                    yData[0] = Float.parseFloat(ntr.getCarbs());
+                    yData[1] = Float.parseFloat(ntr.getProtein());
+                    yData[2] = Float.parseFloat(ntr.getFat());
 
-                    yData[0] = Float.parseFloat(carbs);
-                    yData[1] = Float.parseFloat(protein);
-                    yData[2] = Float.parseFloat(fat);
-
-                    pieChart = (PieChart) findViewById(R.id.idPieChart);
-
-                    pieChart.setRotationEnabled(true);
-
-                    pieChart.setUsePercentValues(true);
-                    //pieChart.setHoleColor(Color.BLUE);
-                    //pieChart.setCenterTextColor(Color.BLACK);
-                    pieChart.setHoleRadius(25f);
-                    pieChart.setTransparentCircleAlpha(0);
-                    pieChart.setCenterText("Macro Goals Distribution");
-                    pieChart.setCenterTextSize(10);
-                    //pieChart.setDrawEntryLabels(true);
-                    //pieChart.setEntryLabelTextSize(20);
+                    setPieChart();
                     //More options just check out the documentation!
 
                     addDataSet();
 
-//                    pieChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
-//                        @Override
-//                        public void onValueSelected(Entry e, Highlight h) {
-//                            Log.d(TAG, "onValueSelected: Value select from chart.");
-//                            Log.d(TAG, "onValueSelected: " + e.toString());
-//                            Log.d(TAG, "onValueSelected: " + h.toString());
-//
-//                            int pos1 = e.toString().indexOf("(sum): ");
-//                            String percentage = e.toString().substring(pos1 + 3);
-//
-//                            for(int i = 0; i < yData.length; i++){
-//                                if(yData[i] == Float.parseFloat(percentage)){
-//                                    pos1 = i;
-//                                    break;
-//                                }
-//                            }
-//                            String macro = xData[pos1 + 1];
-//                            Toast.makeText(PieChartActivity.this, "Macro: " + macro + "\n" + "percantage: " + percentage + "%", Toast.LENGTH_LONG).show();
-//                        }
-//
-//                        @Override
-//                        public void onNothingSelected() {
-//
-//                        }
-//                    });
+
 
                 } catch (JSONException e) {
                     Toast.makeText(PieChartActivity.this, "Error1", Toast.LENGTH_SHORT).show();
@@ -126,6 +85,20 @@ public class PieChartActivity extends Activity {
                 Log.w("tag", "Failed to read value.", error.toException());
             }
         });
+    }
+
+    protected void setPieChart(){
+        pieChart = (PieChart) findViewById(R.id.idPieChart);
+
+        pieChart.setRotationEnabled(true);
+
+        pieChart.setUsePercentValues(true);
+        //pieChart.setHoleColor(Color.BLUE);
+        //pieChart.setCenterTextColor(Color.BLACK);
+        pieChart.setHoleRadius(25f);
+        pieChart.setTransparentCircleAlpha(0);
+        pieChart.setCenterText("Macro Goals Distribution");
+        pieChart.setCenterTextSize(10);
     }
 
     private void addDataSet() {
