@@ -24,21 +24,21 @@ import org.json.JSONException;
 public class SleepActivity extends AppCompatActivity{
 
     protected SleepView sleepView;
-    protected String date;
-    protected String monthyear;
     protected String bedtime, hours;
     protected JSONArray dateInfo;
-
     protected EditText editText_bedtime;
     protected EditText editText_hours;
+    Date datebundle = new Date();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sleep);
         sleepView = new SleepView(this);
-        date = getIntent().getExtras().getString("DATE");
-        monthyear = getIntent().getExtras().getString("MONTHYEAR");
+        datebundle.setDate(getIntent().getExtras().getString("DATE"));
+        String date = datebundle.getDate();
+        datebundle.setMonthyear(getIntent().getExtras().getString("MONTHYEAR"));
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myref_date = database.getReference(date + "s");
         myref_date.addValueEventListener(new ValueEventListener() {
@@ -53,14 +53,12 @@ public class SleepActivity extends AppCompatActivity{
                     }
                     editText_bedtime = (EditText) findViewById(R.id.bedtime);
                     editText_hours = (EditText) findViewById(R.id.hours);
-
                     editText_bedtime.setText((String) dateInfo.get(0));
                     editText_hours.setText((String) dateInfo.get(1));
 
                 } catch (JSONException e) {
                     Toast.makeText(SleepActivity.this, "Error1", Toast.LENGTH_SHORT).show();
                 }
-
             }
 
             public void onCancelled(DatabaseError error) {
@@ -72,7 +70,8 @@ public class SleepActivity extends AppCompatActivity{
 
     public void onClick(View view) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myref_date = database.getReference(date + "s");
+        DatabaseReference myref_date = database.getReference(datebundle.getDate() + "s");
+
         editText_bedtime = (EditText) findViewById(R.id.bedtime);
         bedtime = editText_bedtime.getText().toString();
 
