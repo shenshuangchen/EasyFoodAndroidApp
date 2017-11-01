@@ -23,17 +23,13 @@ import org.json.JSONException;
     public class VitalsActivity extends AppCompatActivity {
 
     protected VitalsView vitalsView;
-
     protected String heartRate;
     protected String bloodPressureS;
     protected String bloodPressureD;
     protected String bodyTemperature;
     protected String respiratoryRate;
-
-    protected String date;
-    protected String monthyear;
     protected JSONArray dateInfo;
-
+    Date datebundle = new Date();
     protected EditText editText_heartRate;
     protected EditText editText_bloodPressureS;
     protected EditText editText_bloodPressureD;
@@ -45,8 +41,9 @@ import org.json.JSONException;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vitals);
         vitalsView = new VitalsView(this);
-        date = getIntent().getExtras().getString("DATE");
-        monthyear = getIntent().getExtras().getString("MONTHYEAR");
+        datebundle.setDate(getIntent().getExtras().getString("DATE"));
+        String date = datebundle.getDate();
+        datebundle.setMonthyear(getIntent().getExtras().getString("MONTHYEAR"));
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myref_date = database.getReference(date + "v");
         myref_date.addValueEventListener(new ValueEventListener() {
@@ -59,12 +56,8 @@ import org.json.JSONException;
                     } else {
                         dateInfo = new JSONArray(s);
                     }
-                    editText_heartRate = (EditText) findViewById(R.id.hr);
-                    editText_bloodPressureS = (EditText) findViewById(R.id.bps);
-                    editText_bloodPressureD = (EditText) findViewById(R.id.bpd);
-                    editText_bodyTemperature = (EditText) findViewById(R.id.bt);
-                    editText_respiratoryRate = (EditText) findViewById(R.id.rr);
 
+                    getEditTexts();
                     editText_heartRate.setText((String) dateInfo.get(0));
                     editText_bloodPressureS.setText((String) dateInfo.get(1));
                     editText_bloodPressureD.setText((String) dateInfo.get(2));
@@ -84,14 +77,8 @@ import org.json.JSONException;
 
     public void onClick(View view) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myref_date = database.getReference(date + "v");
-
-        editText_heartRate = (EditText) findViewById(R.id.hr);
-        editText_bloodPressureS = (EditText) findViewById(R.id.bps);
-        editText_bloodPressureD = (EditText) findViewById(R.id.bpd);
-        editText_bodyTemperature = (EditText) findViewById(R.id.bt);
-        editText_respiratoryRate = (EditText) findViewById(R.id.rr);
-
+        DatabaseReference myref_date = database.getReference(datebundle.getDate() + "s");
+        getEditTexts();
         heartRate = editText_heartRate.getText().toString();
         bloodPressureS = editText_bloodPressureS.getText().toString();
         bloodPressureD = editText_bloodPressureD.getText().toString();
@@ -114,6 +101,13 @@ import org.json.JSONException;
         } catch (JSONException e) {
             Toast.makeText(VitalsActivity.this, "Error2", Toast.LENGTH_SHORT).show();
         }
+    }
+    public void getEditTexts(){
+        editText_heartRate = (EditText) findViewById(R.id.hr);
+        editText_bloodPressureS = (EditText) findViewById(R.id.bps);
+        editText_bloodPressureD = (EditText) findViewById(R.id.bpd);
+        editText_bodyTemperature = (EditText) findViewById(R.id.bt);
+        editText_respiratoryRate = (EditText) findViewById(R.id.rr);
     }
 }
 
