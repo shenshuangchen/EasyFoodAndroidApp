@@ -14,38 +14,34 @@ import java.util.Calendar;
 
 public class CalendarActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
-        CalendarView view = (CalendarView) findViewById(R.id.calendar);
+        final CalendarView view = (CalendarView) findViewById(R.id.calendar);
         long date = Calendar.getInstance().getTimeInMillis();
         view.setDate(date);
         final String type = getIntent().getExtras().getString("Type");
-        view.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+
+        view.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {//user select a date, and choose the correct activity
+            public void startRelevantEvent(Class ActivityName,int year, int month, int dayOfMonth){
+                Intent i = new Intent(CalendarActivity.this, ActivityName);
+                int month_add;
+                month_add = month + 1;
+                i.putExtra("DATE", month_add + "," + dayOfMonth + "," + year);
+                i.putExtra("MONTHYEAR", month_add + "," + year);
+                view.getContext().startActivity(i);
+            }
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
+
                 if (type.equals("calendar")) {
-                    Intent i = new Intent(CalendarActivity.this, FoodActivity.class);
-                    int month_add;
-                    month_add = month + 1;
-                    i.putExtra("DATE", month_add + "," + dayOfMonth + "," + year);
-                    i.putExtra("MONTHYEAR", month_add + "," + year);
-                    view.getContext().startActivity(i);
+                    startRelevantEvent(FoodActivity.class, year, month, dayOfMonth);
                 } else if (type.equals("vitals")) {
-                    Intent i = new Intent(CalendarActivity.this, VitalsActivity.class);
-                    int month_add;
-                    month_add = month + 1;
-                    i.putExtra("DATE", month_add + "," + dayOfMonth + "," + year);
-                    i.putExtra("MONTHYEAR", month_add + "," + year);
-                    view.getContext().startActivity(i);
+                    startRelevantEvent(VitalsActivity.class,year,month,dayOfMonth);
                 } else {
-                    Intent i = new Intent(CalendarActivity.this, SleepActivity.class);
-                    int month_add;
-                    month_add = month + 1;
-                    i.putExtra("DATE", month_add + "," + dayOfMonth + "," + year);
-                    i.putExtra("MONTHYEAR", month_add + "," + year);
-                    view.getContext().startActivity(i);
+                    startRelevantEvent(SleepActivity.class,year, month, dayOfMonth);
                 }
             }
         });
