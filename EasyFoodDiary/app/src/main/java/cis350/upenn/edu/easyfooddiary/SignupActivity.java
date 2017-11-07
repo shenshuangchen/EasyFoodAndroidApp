@@ -55,15 +55,15 @@ public class SignupActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(SignupActivity.this, "hello", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(SignupActivity.this, MainActivity.class);
+                                        Toast.makeText(SignupActivity.this, "Successfully Signed Up", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(intent);
                                     } else {
                                         Toast.makeText(SignupActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(SignupActivity.this, MainActivity.class);
-                                        startActivity(intent);
+                                        //Intent intent = new Intent(SignupActivity.this, MainActivity.class);
+                                        //startActivity(intent);
 
                                     }
                                 }
