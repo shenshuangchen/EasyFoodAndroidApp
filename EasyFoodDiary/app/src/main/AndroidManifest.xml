@@ -9,14 +9,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
-            android:label="MainActivity"
+            android:name=".LoginActivity"
+            android:label="LoginActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".CalendarActivity"
             android:label="CalendarActivity"
@@ -73,7 +77,6 @@
             android:name=".SleepActivity"
             android:label="SleepActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".LoginActivity"></activity>
     </application>
 
 </manifest>

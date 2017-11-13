@@ -48,7 +48,6 @@ public class SignupActivity extends AppCompatActivity {
 
                 if (password.isEmpty() || email.isEmpty()) {
                     Toast.makeText(SignupActivity.this, "No email or password", Toast.LENGTH_SHORT).show();
-
                 } else {
                     mFirebaseAuth.createUserWithEmailAndPassword(email, password)
                             .addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
@@ -56,14 +55,14 @@ public class SignupActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
                                         Toast.makeText(SignupActivity.this, "hello", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(SignupActivity.this, MainActivity.class);
+                                        Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(intent);
                                     } else {
                                         Toast.makeText(SignupActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(SignupActivity.this, MainActivity.class);
-                                        startActivity(intent);
+                                        //Intent intent = new Intent(SignupActivity.this, MainActivity.class);
+//                                        startActivity(intent);
 
                                     }
                                 }
