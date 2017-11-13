@@ -9,11 +9,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
 
 public class LoginActivity extends AppCompatActivity {
     protected EditText emailEditText;
@@ -66,9 +68,8 @@ public class LoginActivity extends AppCompatActivity {
                                         startActivity(intent);
                                     } else {
                                         Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                        startActivity(intent);
-
+//                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                                        startActivity(intent);
                                     }
                                 }
                             });
