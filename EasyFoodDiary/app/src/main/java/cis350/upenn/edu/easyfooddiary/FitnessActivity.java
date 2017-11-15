@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,9 +34,14 @@ public class FitnessActivity extends AppCompatActivity{
         setContentView(R.layout.activity_fitness);
         fitnessView = new FitnessView(this);
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myref_workoutsPerWeek = database.getReference("Workouts_Per_Week");
-        DatabaseReference myref_minutesPerWorkout = database.getReference("Minutes_Per_Workout");
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference myref_workoutsPerWeek = FirebaseDatabase.getInstance().getReference("Workouts_Per_Week").child(user.getUid());
+        DatabaseReference myref_minutesPerWorkout = FirebaseDatabase.getInstance().getReference("Minutes_Per_Workout").child(user.getUid());
+
+
+        //FirebaseDatabase database = FirebaseDatabase.getInstance();
+        //DatabaseReference myref_workoutsPerWeek = database.getReference("Workouts_Per_Week");
+        //DatabaseReference myref_minutesPerWorkout = database.getReference("Minutes_Per_Workout");
 
         myref_workoutsPerWeek.addValueEventListener(new ValueEventListener() {
             @Override
@@ -74,9 +81,14 @@ public class FitnessActivity extends AppCompatActivity{
             startActivity(i);
         } else*/
 
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference myref_workoutsPerWeek = database.getReference("Workouts_Per_Week");
-            DatabaseReference myref_minutesPerWorkout = database.getReference("Minutes_Per_Workout");
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            DatabaseReference myref_workoutsPerWeek = FirebaseDatabase.getInstance().getReference("Workouts_Per_Week");
+            DatabaseReference myref_minutesPerWorkout = FirebaseDatabase.getInstance().getReference("Minutes_Per_Workout");
+
+
+            // FirebaseDatabase database = FirebaseDatabase.getInstance();
+           // DatabaseReference myref_workoutsPerWeek = database.getReference("Workouts_Per_Week");
+            //DatabaseReference myref_minutesPerWorkout = database.getReference("Minutes_Per_Workout");
 
             editText_workoutsPerWeek = (EditText) findViewById(R.id.workoutsPerWeek);
             workoutsPerWeek = editText_workoutsPerWeek.getText().toString();
@@ -85,8 +97,12 @@ public class FitnessActivity extends AppCompatActivity{
             minutesPerWorkout = editText_minutesPerWorkout.getText().toString();
 
             try {
-                myref_workoutsPerWeek.setValue(workoutsPerWeek);
-                myref_minutesPerWorkout.setValue(minutesPerWorkout);
+                //myref_workoutsPerWeek.setValue(workoutsPerWeek);
+                myref_workoutsPerWeek.child(user.getUid()).setValue(workoutsPerWeek);
+
+                //myref_minutesPerWorkout.setValue(minutesPerWorkout);
+                myref_minutesPerWorkout.child(user.getUid()).setValue(minutesPerWorkout);
+
 
                 Toast.makeText(fitnessView.getContext(),
                         "Your fitness goals have been saved", Toast.LENGTH_SHORT).show();

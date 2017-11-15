@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,11 +41,16 @@ public class SleepActivity extends AppCompatActivity{
         datebundle.setDate(getIntent().getExtras().getString("DATE"));
         String date = datebundle.getDate();
         datebundle.setMonthyear(getIntent().getExtras().getString("MONTHYEAR"));
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myref_date = database.getReference(date + "s");
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference myref_date = FirebaseDatabase.getInstance().getReference(date + "s").child(user.getUid());
+
+        //FirebaseDatabase database = FirebaseDatabase.getInstance();
+        //DatabaseReference myref_date = database.getReference(date + "s");
         myref_date.addValueEventListener(new ValueEventListener() {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String s = dataSnapshot.getValue(String.class);
+                //final String tempString = new String(); //this is my user_class Class
                 try {
                     if (s == null) {
                         String[] arr = {"", ""};
@@ -69,8 +76,11 @@ public class SleepActivity extends AppCompatActivity{
     }
 
     public void onClick(View view) {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myref_date = database.getReference(datebundle.getDate() + "s");
+        //DatabaseReference myref_date = FirebaseDatabase.getInstance().getReference(date + "s").child(user.getUid());
+        //DatabaseReference myref_date = database.getReference(datebundle.getDate() + "s");
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference myref_date = FirebaseDatabase.getInstance().getReference(datebundle.getDate() + "s");
 
         editText_bedtime = (EditText) findViewById(R.id.bedtime);
         bedtime = editText_bedtime.getText().toString();
@@ -81,7 +91,9 @@ public class SleepActivity extends AppCompatActivity{
         try {
             dateInfo.put(0, bedtime);
             dateInfo.put(1, hours);
-            myref_date.setValue(dateInfo.toString());
+            myref_date.child(user.getUid()).setValue(dateInfo.toString());
+
+            //myref_date.setValue(dateInfo.toString());
             Toast.makeText(sleepView.getContext(),
                     "Saved", Toast.LENGTH_SHORT).show();
             Intent i = new Intent(this, CalendarActivity.class);

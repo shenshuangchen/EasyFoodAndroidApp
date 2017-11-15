@@ -11,6 +11,8 @@ import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,8 +43,8 @@ public class PieChartActivity extends Activity {
         setContentView(R.layout.piechartdistribution);
         Log.d(TAG, "onCreate: starting to create chart");
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myref_nutrition = database.getReference("nutrition");
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference myref_nutrition = FirebaseDatabase.getInstance().getReference("nutrition").child(user.getUid());
 
         myref_nutrition.addValueEventListener(new ValueEventListener() {
             @Override
