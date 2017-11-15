@@ -51,9 +51,9 @@ public class MotivationActivity extends AppCompatActivity {
         textView_quote.setText(quotes[rand]);
     }
     public void onClick(View view) {
-        if (view.getId() == R.id.main) {
+        /*if (view.getId() == R.id.main) {
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
-        }
+        }*/
     }
 }

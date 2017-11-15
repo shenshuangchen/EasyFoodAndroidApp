@@ -69,10 +69,11 @@ public class FitnessActivity extends AppCompatActivity{
 
     protected void onClick(View view) {
 
-        if (view.getId() == R.id.main) {
+        /*if (view.getId() == R.id.main) {
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
-        } else {
+        } else*/
+
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             DatabaseReference myref_workoutsPerWeek = database.getReference("Workouts_Per_Week");
             DatabaseReference myref_minutesPerWorkout = database.getReference("Minutes_Per_Workout");
@@ -95,6 +96,6 @@ public class FitnessActivity extends AppCompatActivity{
                 Toast.makeText(fitnessView.getContext(),
                         "Error", Toast.LENGTH_SHORT).show();
             }
-        }
+       // }
     }
 }

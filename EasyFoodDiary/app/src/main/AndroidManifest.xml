@@ -11,7 +11,7 @@
         <activity
             android:name=".LoginActivity"
             android:label="LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.Dark">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,23 +21,23 @@
         <activity
             android:name=".MainActivity"
             android:label="MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.Dark" />
         <activity
             android:name=".CalendarActivity"
             android:label="CalendarActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.ButtonDark" />
         <activity
             android:name=".FoodActivity"
             android:label="FoodActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.Dark" />
         <activity
             android:name=".InformationActivity"
             android:label="InformationActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.Dark" />
         <activity
             android:name=".SignupActivity"
             android:label="SignupActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.Dark" />
         <activity
             android:name=".HomeActivity"
             android:label="HomeActivity"
@@ -45,41 +45,44 @@
         <activity
             android:name=".MotivationActivity"
             android:label="MotivationActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.Dark" />
         <activity
             android:name=".VitalsActivity"
             android:label="VitalsActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.Dark" />
         <activity
             android:name=".FitnessActivity"
             android:label="FitnessActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.Dark" />
         <activity
             android:name=".CalculatorActivity"
             android:label="CalculatorActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.Dark" />
         <activity
             android:name=".NutritionActivity"
             android:label="NutritionActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.Dark" />
         <activity
             android:name=".MacrosActivity"
             android:label="MacrosActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.Dark" />
         <activity
             android:name=".PieChartActivity"
             android:label="PieChartActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.Dark" />
         <activity
             android:name=".BMIActivity"
             android:label="BMIActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.Dark" />
         <activity
             android:name=".SleepActivity"
             android:label="SleepActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".ResetPasswordActivity"></activity>
+            android:theme="@style/AppTheme.Dark" />
+
+        <activity
+            android:name=".ProfileActivity"
+            android:label="ProfileActivity"
+            android:theme="@style/AppTheme.Dark" />
     </application>
 
 </manifest>
