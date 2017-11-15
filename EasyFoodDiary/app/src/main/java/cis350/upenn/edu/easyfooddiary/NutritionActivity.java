@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,8 +34,13 @@ public class NutritionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_nutrition);
         nutritionView = new NutritionView(this);
         final TextView myView = (TextView) findViewById(R.id.textView);
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myref_nutrition = database.getReference("nutrition");
+        //FirebaseDatabase database = FirebaseDatabase.getInstance();
+        //DatabaseReference myref_nutrition = database.getReference("nutrition");
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference myref_nutrition = FirebaseDatabase.getInstance().getReference("nutrition").child(user.getUid());
+
+
         myref_nutrition.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -83,8 +91,12 @@ public class NutritionActivity extends AppCompatActivity {
     }
 
     protected void onClick(View view) {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myref_nutrition = database.getReference("nutrition");
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference myref_nutrition = FirebaseDatabase.getInstance().getReference("nutrition");
+
+        //FirebaseDatabase database = FirebaseDatabase.getInstance();
+        //DatabaseReference myref_nutrition = database.getReference("nutrition");
 
         //Toast.makeText(NutritionActivity.this, "hit button", Toast.LENGTH_SHORT).show();
         if (view.getId() == R.id.Save) {
@@ -101,7 +113,7 @@ public class NutritionActivity extends AppCompatActivity {
                     info.put(1, ntr.getCarbs());
                     info.put(2, ntr.getProtein());
                     info.put(3, ntr.getFat());
-                    myref_nutrition.setValue(info.toString());
+                    myref_nutrition.child(user.getUid()).setValue(info.toString());
                     Toast.makeText(nutritionView.getContext(),
                             "Saved", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(this, MainActivity.class);

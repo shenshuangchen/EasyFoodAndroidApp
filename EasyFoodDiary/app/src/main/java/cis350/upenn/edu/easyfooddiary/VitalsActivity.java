@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,6 +46,12 @@ import org.json.JSONException;
         datebundle.setDate(getIntent().getExtras().getString("DATE"));
         String date = datebundle.getDate();
         datebundle.setMonthyear(getIntent().getExtras().getString("MONTHYEAR"));
+
+        //FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        //DatabaseReference myref_date = FirebaseDatabase.getInstance().getReference(date + "v").child(user.getUid());
+
+
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myref_date = database.getReference(date + "v");
         myref_date.addValueEventListener(new ValueEventListener() {
@@ -76,6 +84,10 @@ import org.json.JSONException;
     }
 
     public void onClick(View view) {
+
+        //FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        //DatabaseReference myref_date = FirebaseDatabase.getInstance().getReference(datebundle.getDate() + "s");
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myref_date = database.getReference(datebundle.getDate() + "s");
         getEditTexts();
@@ -91,6 +103,9 @@ import org.json.JSONException;
             dateInfo.put(2, bloodPressureD);
             dateInfo.put(3, bodyTemperature);
             dateInfo.put(4, respiratoryRate);
+
+            //myref_date.child(user.getUid()).setValue(dateInfo.toString());
+
             myref_date.setValue(dateInfo.toString());
             Toast.makeText(vitalsView.getContext(),
                     "Saved", Toast.LENGTH_SHORT).show();
