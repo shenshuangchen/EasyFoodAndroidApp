@@ -78,7 +78,8 @@
             android:name=".SleepActivity"
             android:label="SleepActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".ResetPasswordActivity"></activity>
     </application>
 
 </manifest>
