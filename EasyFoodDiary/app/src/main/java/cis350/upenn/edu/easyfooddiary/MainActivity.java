@@ -56,8 +56,13 @@ public class MainActivity extends AppCompatActivity {
             Intent i = new Intent(this, CalendarActivity.class);
             i.putExtra("Type","sleep");
             startActivity(i);
+
         }else if(view.getId() == R.id.UserProfile){
             Intent i = new Intent(this, ProfileActivity.class);
+            startActivity(i);
+
+        }else if(view.getId() == R.id.Social){
+            Intent i = new Intent(this, SocialActivity.class);
             startActivity(i);
         }
     }
