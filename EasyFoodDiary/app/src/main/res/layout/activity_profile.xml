@@ -39,40 +39,56 @@
                 android:text="Large Text" />
         </android.support.design.widget.TextInputLayout>
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/buttonLogout"
-            android:layout_width="fill_parent"
-            android:onClick="onClick"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp"
-            android:padding="12dp"
-            android:text="Logout"/>
-
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btnChoose"
-            android:text="Choose"
-            android:layout_width="fill_parent"
-            android:onClick="onClick"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp"
-            android:padding="12dp" />
-
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btnUpload"
-            android:text="Upload"
-            android:layout_width="fill_parent"
-            android:onClick="onClick"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp"
-            android:padding="12dp" />
-
         <ImageView
             android:id="@+id/imgView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation = "horizontal">
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btnUpload"
+                android:layout_width="145dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:padding="12dp"
+                android:onClick="onClick"
+                android:text="Upload" />
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btnChoose"
+                android:layout_width="145dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:padding="12dp"
+                android:onClick="onClick"
+                android:text="Choose"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/deleteAccount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:padding="12dp"
+            android:onClick="onClick"
+            android:text="Delete Account" />
+
+        <TextView android:id="@+id/textLogout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="Logout"
+            android:gravity="center"
+            android:textSize="16dip"
+            android:textColor="#CCCCCC"/>
+
+
 
     </LinearLayout>
 

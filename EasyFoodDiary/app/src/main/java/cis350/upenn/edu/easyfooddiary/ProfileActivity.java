@@ -34,7 +34,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     //view objects
     private TextView textViewUserEmail;
-    private Button buttonLogout;
+
+    private TextView logoutTextView;
 
     private Button btnChoose, btnUpload;
     private ImageView imageView;
@@ -45,6 +46,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     private FirebaseStorage storage;
     private StorageReference storageReference;
+    protected Button deleteAccount;
 
 
     @Override
@@ -70,15 +72,16 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         //initializing views
         textViewUserEmail = (TextView) findViewById(R.id.textViewUserEmail);
-        buttonLogout = (Button) findViewById(R.id.buttonLogout);
+        logoutTextView = (TextView) findViewById(R.id.textLogout);
 
         //displaying logged in user name
         textViewUserEmail.setText("Welcome "+user.getEmail());
 
         //adding listener to button
-        buttonLogout.setOnClickListener(this);
+        logoutTextView.setOnClickListener(this);
 
         //Initialize Views
+        deleteAccount = (Button)findViewById(R.id.deleteAccount);
         btnChoose = (Button) findViewById(R.id.btnChoose);
         btnUpload = (Button) findViewById(R.id.btnUpload);
         imageView = (ImageView) findViewById(R.id.imgView);
@@ -98,18 +101,39 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 uploadImage();
             }
         });
-
+        deleteAccount.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         //if logout is pressed
-        if(view == buttonLogout){
+        if(view == logoutTextView){
             //logging out the user
             firebaseAuth.signOut();
             //closing activity
             finish();
             //starting login activity
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+        else if(view == deleteAccount){
+            //TO DO
+
+            //Toast.makeText(ProfileActivity.this, ""+FirebaseDatabase.getInstance().getReference().child(firebaseAuth.getCurrentUser().get), Toast.LENGTH_SHORT).show();
+
+
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+            user.delete()
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(ProfileActivity.this, "User account deleted.", Toast.LENGTH_SHORT).show();
+                                //Log.d("TAG", "");
+                            }
+                        }
+                    });
+
             startActivity(new Intent(this, LoginActivity.class));
         }
     }
