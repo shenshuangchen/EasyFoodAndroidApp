@@ -43,7 +43,7 @@ public class SocialActivity extends AppCompatActivity {
                 profile.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
-                        if(uid == null){
+                        if(uid.isEmpty()){
                             Toast.makeText(SocialActivity.this, "User does not exist!", Toast.LENGTH_SHORT).show();
                         }else if (snapshot.hasChild(uid)) {
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
