@@ -82,7 +82,8 @@
             android:name=".ProfileActivity"
             android:label="ProfileActivity"
             android:theme="@style/AppTheme.Dark" />
-        <activity android:name=".ResetPasswordActivity"></activity>
+        <activity android:name=".ResetPasswordActivity" />
+        <activity android:name=".SocialActivity"></activity>
     </application>
 
 </manifest>
