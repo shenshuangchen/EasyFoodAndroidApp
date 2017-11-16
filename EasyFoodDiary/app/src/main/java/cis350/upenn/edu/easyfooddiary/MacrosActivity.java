@@ -99,11 +99,11 @@ public class MacrosActivity extends AppCompatActivity {
     public void onClick(View view) {
         //have to differentiate amongst buttons
             //have to differentiate amongst buttons
-            if (view.getId() == R.id.main) {
+           /* if (view.getId() == R.id.main) {
                 Intent i = new Intent(this, MainActivity.class);
                 startActivity(i);
             }
-
+*/
 
 
     }

@@ -1,12 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1"
     tools:context="cis350.upenn.edu.easyfooddiary.InformationActivity">
+    <!--android:weightSum="1"-->
 
-    <EditText
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="56dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp">
+
+        <ImageView android:src="@drawable/logo"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginBottom="24dp"
+            android:layout_gravity="center_horizontal" />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <EditText android:id="@+id/Name"
+                android:ems="10"
+                android:text=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:textColor="@color/iron"
+                android:hint="Name" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <EditText android:id="@+id/eGoal"
+                android:layout_width="match_parent"
+                android:text=""
+                android:ems="10"
+                android:layout_height="wrap_content"
+                android:textColor="@color/iron"
+                android:inputType="textLongMessage"
+                android:hint="Exercise Goal"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <EditText android:id="@+id/Date"
+                android:layout_width="wrap_content"
+                android:text=""
+                android:textColor="@color/iron"
+                android:ems="10"
+                android:layout_height="wrap_content"
+                android:inputType="date"
+                android:hint="Birthdate (MM/DD/YYYY)"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <EditText android:id="@+id/wGoal"
+                android:layout_width="wrap_content"
+                android:text=""
+                android:ems="10"
+                android:textColor="@color/iron"
+                android:layout_height="wrap_content"
+                android:inputType="date"
+                android:hint="Weight Goal"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <EditText android:id="@+id/mGoal"
+                android:layout_width="wrap_content"
+                android:text=""
+                android:ems="10"
+                android:textColor="@color/iron"
+                android:layout_height="wrap_content"
+                android:inputType="date"
+                android:hint="Misc. Goal"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/Save"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:padding="12dp"
+            android:onClick="onClick"
+            android:text="Save"/>
+
+    </LinearLayout>
+
+
+    <!--<EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
@@ -16,9 +120,9 @@
         android:id="@+id/Name"
         android:layout_below="@+id/main"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true" />-->
 
-    <Button
+    <!--<Button
         android:text="Save"
         android:layout_width="145dp"
         android:layout_height="wrap_content"
@@ -29,9 +133,9 @@
         android:layout_marginEnd="13dp"
         android:layout_below="@+id/mGoal"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true" />-->
 
-    <EditText
+    <!--<EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textLongMessage"
@@ -42,9 +146,9 @@
         android:layout_below="@+id/Date"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="13dp" />
+        android:layout_marginTop="13dp" />-->
 
-    <EditText
+    <!--<EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="date"
@@ -67,8 +171,8 @@
         android:layout_below="@+id/eGoal"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="11dp" />
-    <EditText
+        android:layout_marginTop="11dp" />-->
+    <!--<EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -78,15 +182,15 @@
         android:layout_below="@+id/wGoal"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="11dp" />
+        android:layout_marginTop="11dp" />-->
 
-    <Button
+    <!--<Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/main"
         android:text="Main"
         android:onClick="onClick"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true" />-->
 
 </RelativeLayout>

@@ -27,11 +27,11 @@ public class BMIActivity  extends AppCompatActivity {
 
     public void onClick(View view) {
         //have to differentiate amongst buttons
-        if (view.getId() == R.id.main) {
+        /*if (view.getId() == R.id.main) {
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
         }
-        else if (view.getId() == R.id.calculate) {;
+        else*/ if (view.getId() == R.id.calculate) {;
             String weight = editText_weight.getText().toString();
             String height = editText_height.getText().toString();
             if (height.equals("") || weight.equals("")) {

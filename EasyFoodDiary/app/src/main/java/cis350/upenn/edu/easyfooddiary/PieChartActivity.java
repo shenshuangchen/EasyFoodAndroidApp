@@ -121,13 +121,14 @@ public class PieChartActivity extends Activity {
 
         //add colors to dataset
         ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.GRAY);
-        colors.add(Color.BLUE);
-        colors.add(Color.RED);
-        colors.add(Color.GREEN);
-        colors.add(Color.CYAN);
-        colors.add(Color.YELLOW);
-        colors.add(Color.MAGENTA);
+        colors.add(Color.rgb(146, 174, 150));//green
+        colors.add(Color.rgb(119, 138, 166));//deeper gray
+        colors.add(Color.rgb(119, 164, 166));//light green
+        colors.add(Color.rgb(157, 164, 166));//gray
+        colors.add(Color.rgb(217, 161, 150));//pink
+        colors.add(Color.rgb(247, 202, 150));//orange
+        colors.add(Color.rgb(212, 202, 236));//purple
+        colors.add(Color.rgb(192, 164, 182));//light purple
 
         pieDataSet.setColors(colors);
 

@@ -29,11 +29,11 @@ public class CalculatorActivity extends AppCompatActivity {
 
     public void onClick(View view) {
         //have to differentiate amongst buttons
-        if (view.getId() == R.id.main) {
+        /*if (view.getId() == R.id.main) {
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
         }
-        else if (view.getId() == R.id.calculate) {;
+        else*/ if (view.getId() == R.id.calculate) {;
             String calories = editText_calories.getText().toString();
             if (calories.equals("")) {
                 Toast.makeText(CalculatorActivity.this, "Enter calories to burn", Toast.LENGTH_SHORT).show();

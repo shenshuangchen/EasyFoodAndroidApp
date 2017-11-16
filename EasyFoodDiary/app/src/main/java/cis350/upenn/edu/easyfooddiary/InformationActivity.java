@@ -185,10 +185,10 @@ public class InformationActivity extends AppCompatActivity {
     }
     /////////////////////////////////////////////////
     protected void onClick(View view) {
-        if (view.getId() == R.id.main) {
+        /*if (view.getId() == R.id.main) {
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
-        } else {
+        } else {*/
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             /*DatabaseReference myref_name = database.getReference("name");
             DatabaseReference myref_date = database.getReference("date");
@@ -243,7 +243,7 @@ public class InformationActivity extends AppCompatActivity {
                 Toast.makeText(informationView.getContext(),
                         "Please enter valid date format", Toast.LENGTH_SHORT).show();
             }
-        }
+        //}
     }
 
 }
