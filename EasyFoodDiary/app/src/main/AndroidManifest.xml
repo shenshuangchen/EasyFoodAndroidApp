@@ -78,11 +78,11 @@
             android:name=".SleepActivity"
             android:label="SleepActivity"
             android:theme="@style/AppTheme.Dark" />
-
         <activity
             android:name=".ProfileActivity"
             android:label="ProfileActivity"
             android:theme="@style/AppTheme.Dark" />
+        <activity android:name=".ResetPasswordActivity"></activity>
     </application>
 
 </manifest>
