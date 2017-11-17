@@ -17,11 +17,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 public class SocialActivity extends AppCompatActivity {
 
     protected EditText searchEditText;
     protected Button buttonSearch;
-    String uid;
+    String uname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +38,7 @@ public class SocialActivity extends AppCompatActivity {
         buttonSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uid = searchEditText.getText().toString();
+                uname = searchEditText.getText().toString();
                 DatabaseReference root = FirebaseDatabase.getInstance().getReference();
                 DatabaseReference profile = root.child("profile");
                 //email = "ZxInLv9EmnRdzBtgzSRA0LYgms52";
@@ -43,12 +46,33 @@ public class SocialActivity extends AppCompatActivity {
                 profile.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
-                        if(uid.isEmpty()){
+                        if(uname.isEmpty()){
                             Toast.makeText(SocialActivity.this, "User does not exist!", Toast.LENGTH_SHORT).show();
-                        }else if (snapshot.hasChild(uid)) {
+                        }else if (snapshot.hasChild(uname)) {
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                            DatabaseReference myref_friend = FirebaseDatabase.getInstance().getReference("friends");
-                            myref_friend.child(user.getUid()).setValue(uid);
+                            DatabaseReference myref_friend = FirebaseDatabase.getInstance().getReference("friendsName");
+                            DatabaseReference myref_profile = FirebaseDatabase.getInstance().getReference("profile").child(uname);
+                            myref_friend.child(user.getUid()).setValue(uname);
+
+
+                            myref_profile.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    // This method is called once with the initial value and again
+                                    // whenever data at this location is updated.
+                                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                    String uid = dataSnapshot.getValue(String.class);
+                                    DatabaseReference id_friend = FirebaseDatabase.getInstance().getReference("friendsId");
+                                    id_friend.child(user.getUid()).setValue(uid);
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError error) {
+                                    // Failed to read value
+                                    Log.w("tag", "Failed to read value.", error.toException());
+                                }
+                            });
+
                             Toast.makeText(SocialActivity.this, "Successfully Added", Toast.LENGTH_SHORT).show();
                         }else{
                             Toast.makeText(SocialActivity.this, "User does not exist!", Toast.LENGTH_SHORT).show();

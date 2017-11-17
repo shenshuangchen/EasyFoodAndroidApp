@@ -39,6 +39,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     private Button btnChoose, btnUpload;
     private ImageView imageView;
+    private Button setUserName;
 
     private Uri filePath;
 
@@ -81,6 +82,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         logoutTextView.setOnClickListener(this);
 
         //Initialize Views
+        setUserName = (Button) findViewById(R.id.setUsername);
         deleteAccount = (Button)findViewById(R.id.deleteAccount);
         btnChoose = (Button) findViewById(R.id.btnChoose);
         btnUpload = (Button) findViewById(R.id.btnUpload);
@@ -102,6 +104,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             }
         });
         deleteAccount.setOnClickListener(this);
+        setUserName.setOnClickListener(this);
+
     }
 
     @Override
@@ -135,6 +139,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                     });
 
             startActivity(new Intent(this, LoginActivity.class));
+        }else if(view == setUserName){
+            startActivity(new Intent(this, UsernameActivity.class));
+
         }
     }
 

@@ -61,9 +61,6 @@ public class SignupActivity extends AppCompatActivity {
                                         Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                        DatabaseReference myref_profile = FirebaseDatabase.getInstance().getReference("profile");
-                                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                        myref_profile.child(user.getUid()).setValue(user.getEmail());
                                         startActivity(intent);
                                     } else {
                                         Toast.makeText(SignupActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
