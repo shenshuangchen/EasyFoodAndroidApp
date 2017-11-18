@@ -18,6 +18,9 @@ public class ResetPasswordActivity extends AppCompatActivity {
     private Button btnResetPassword;
     private Button btnBack;
     private FirebaseAuth mAuth;
+    protected Button forgetPasswordButton;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,8 @@ public class ResetPasswordActivity extends AppCompatActivity {
         edtEmail = (EditText) findViewById(R.id.edt_reset_email);
         btnResetPassword = (Button) findViewById(R.id.btn_reset_password);
         btnBack = (Button) findViewById(R.id.btn_back);
+        forgetPasswordButton = (Button)findViewById(R.id.forgetPassword);
+
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -46,7 +51,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(ResetPasswordActivity.this, "Check email to reset your password!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ResetPasswordActivity.this, "Successfully sent! Please check email to reset your password!", Toast.LENGTH_SHORT).show();
                                 } else {
                                     Toast.makeText(ResetPasswordActivity.this, "Fail to send reset password email!", Toast.LENGTH_SHORT).show();
                                 }
