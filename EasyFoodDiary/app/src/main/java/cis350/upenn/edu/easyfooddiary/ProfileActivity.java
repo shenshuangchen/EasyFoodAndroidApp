@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -14,8 +16,17 @@ import android.net.Uri;
 import android.graphics.Bitmap;
 import android.provider.MediaStore;
 import java.io.IOException;
+
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.*;
 import android.app.*;
+
+import java.net.URI;
 import java.util.*;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -26,6 +37,9 @@ import com.squareup.picasso.Picasso;
 
 import android.widget.Toast;
 import android.support.annotation.*;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -41,13 +55,17 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private ImageView imageView;
     private Button setUserName;
 
-    private Uri filePath;
+    protected Uri filePath;
 
     private final int PICK_IMAGE_REQUEST = 71;
 
-    private FirebaseStorage storage;
-    private StorageReference storageReference;
+    protected FirebaseStorage storage;
+    protected StorageReference storageReference;
     protected Button deleteAccount;
+
+    protected DatabaseReference dbf;
+    protected Uri downloadUrl;
+    protected Bitmap bitmap;
 
 
     @Override
@@ -60,7 +78,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         //if the user is not logged in
         //that means current user will return null
-        if(firebaseAuth.getCurrentUser() == null){
+        if (firebaseAuth.getCurrentUser() == null) {
             //closing this activity
             finish();
             //starting login activity
@@ -76,19 +94,20 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         logoutTextView = (TextView) findViewById(R.id.textLogout);
 
         //displaying logged in user name
-        textViewUserEmail.setText("Welcome "+user.getEmail());
+        textViewUserEmail.setText("Welcome " + user.getEmail());
 
         //adding listener to button
         logoutTextView.setOnClickListener(this);
 
         //Initialize Views
         setUserName = (Button) findViewById(R.id.setUsername);
-        deleteAccount = (Button)findViewById(R.id.deleteAccount);
+        deleteAccount = (Button) findViewById(R.id.deleteAccount);
         btnChoose = (Button) findViewById(R.id.btnChoose);
         btnUpload = (Button) findViewById(R.id.btnUpload);
         imageView = (ImageView) findViewById(R.id.imgView);
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
+        dbf = FirebaseDatabase.getInstance().getReference().child("images").child(user.getUid());
         btnChoose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,6 +124,48 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         });
         deleteAccount.setOnClickListener(this);
         setUserName.setOnClickListener(this);
+        dbf.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                String s1 = dataSnapshot.getValue(String.class);
+                try{
+                    if(s1 ==null){
+                        imageView.setImageURI(null);
+                        //textViewUserEmail.setText("hellohelllo");
+                    }else{
+                        Uri uri = Uri.parse(s1.toString());
+                        imageView.setImageURI(uri);
+                        //textViewUserEmail.setText(s1.toString());
+                    }
+
+                }catch (NullPointerException e){
+
+                }
+
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
 
     }
 
@@ -161,7 +222,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         {
             filePath = data.getData();
             try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                 imageView.setImageBitmap(bitmap);
             }
 
@@ -186,7 +247,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             progressDialog.dismiss();
-                            Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                            downloadUrl = taskSnapshot.getDownloadUrl();
+                            dbf.push().setValue(downloadUrl.toString());
+
                             Picasso.with(ProfileActivity.this).load(downloadUrl).fit().centerCrop().into(imageView);
                             Toast.makeText(ProfileActivity.this, "Uploaded", Toast.LENGTH_SHORT).show();
                         }
