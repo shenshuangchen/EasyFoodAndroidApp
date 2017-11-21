@@ -19,6 +19,7 @@
         android:paddingLeft="24dp"
         android:paddingRight="24dp">
 
+
         <ImageView android:src="@drawable/logo"
             android:layout_width="75dp"
             android:layout_height="75dp"

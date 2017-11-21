@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:textColor="@color/iron"
-                android:hint="Desired Minutes per Week" />
+                android:hint="Desired Workout per Week" />
         </android.support.design.widget.TextInputLayout>
 
 
@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:textColor="@color/iron"
-                android:hint="Desired Workouts per Week"/>
+                android:hint="Desired Minutes per Week"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.v7.widget.AppCompatButton
