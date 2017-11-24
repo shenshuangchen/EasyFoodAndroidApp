@@ -19,7 +19,6 @@
         android:paddingLeft="24dp"
         android:paddingRight="24dp">
 
-
         <ImageView android:src="@drawable/logo"
             android:layout_width="75dp"
             android:layout_height="75dp"
@@ -160,10 +159,12 @@
                 weight = "1"/>
 
             <android.support.v7.widget.AppCompatButton
+                android:id="@+id/caloriesButton"
                 android:layout_width="wrap_content"
                 android:layout_height="85dp"
+                android:onClick="onClick"
                 android:padding="12dp"
-                android:text="     "
+                android:text="Calories"
                 weight = "1"/>
 
         </LinearLayout>
