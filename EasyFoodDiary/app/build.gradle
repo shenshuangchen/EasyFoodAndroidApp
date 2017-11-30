@@ -21,12 +21,19 @@ android {
     }
 }
 
+repositories {
+    maven { url "https://jitpack.io" }//这部分新加的
+}
+
 dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'//新加的
+
     compile 'com.android.support:appcompat-v7:25.1.1'
     compile 'com.android.support:design:25.1.1'
     compile 'com.google.firebase:firebase-database:10.2.1'
