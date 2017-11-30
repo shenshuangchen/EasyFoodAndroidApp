@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
             i.putExtra("Type","vitals");
             startActivity(i);
         }
-        
+        //接下来这部分是新添加的，这里表示 如果button是Calories就启动CaloriestActivity
         else if (view.getId() == R.id.caloriesButton) {
             Intent i = new Intent(this, CaloriesActivity.class);
             startActivity(i);
