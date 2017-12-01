@@ -47,6 +47,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     //view objects
     private TextView textViewUserEmail;
+    private TextView textViewEGoal;
+    private TextView textViewWGoal;
 
     private TextView logoutTextView;
 
@@ -91,9 +93,65 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         //initializing views
         textViewUserEmail = (TextView) findViewById(R.id.textViewUserEmail);
         logoutTextView = (TextView) findViewById(R.id.textLogout);
-
+        textViewEGoal = (TextView) findViewById(R.id.textViewEGoal);
+        textViewWGoal = (TextView) findViewById(R.id.textViewWGoal);
         //displaying logged in user name
-        textViewUserEmail.setText("Welcome " + user.getEmail());
+        textViewUserEmail = (TextView) findViewById(R.id.textViewUserEmail);
+
+        DatabaseReference ndbr= FirebaseDatabase.getInstance().getReference("name");
+        ndbr.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated
+                String value = dataSnapshot.getValue(String.class);
+                //et_array[index] = (EditText) findViewById(R.id.Name);
+                textViewUserEmail.setText("Name:" + value);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("tag", "Failed to read value.", error.toException());
+            }
+        });
+
+        DatabaseReference edbr= FirebaseDatabase.getInstance().getReference("egoal");
+        edbr.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated
+                String value = dataSnapshot.getValue(String.class);
+                //et_array[index] = (EditText) findViewById(R.id.Name);
+                textViewEGoal.setText("Exercise Goal:" + value);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("tag", "Failed to read value.", error.toException());
+            }
+        });
+        DatabaseReference wdbr= FirebaseDatabase.getInstance().getReference("wgoal");
+        wdbr.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated
+                String value = dataSnapshot.getValue(String.class);
+                //et_array[index] = (EditText) findViewById(R.id.Name);
+                textViewWGoal.setText("Weight Goal:" + value);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("tag", "Failed to read value.", error.toException());
+            }
+        });
+
+
 
         //adding listener to button
         logoutTextView.setOnClickListener(this);

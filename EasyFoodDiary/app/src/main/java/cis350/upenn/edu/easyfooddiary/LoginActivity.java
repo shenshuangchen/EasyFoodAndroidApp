@@ -23,7 +23,7 @@ public class LoginActivity extends AppCompatActivity {
     protected Button logInButton;
     protected TextView signUpTextView;
     private FirebaseAuth mFirebaseAuth;
-    protected Button forgetPasswordButton;
+    protected TextView forgetPasswordButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         emailEditText = (EditText) findViewById(R.id.emailField);
         passwordEditText = (EditText) findViewById(R.id.passwordField);
         logInButton = (Button) findViewById(R.id.loginButton);
-        forgetPasswordButton = (Button)findViewById(R.id.forgetPassword);
+        forgetPasswordButton = (TextView)findViewById(R.id.forgetPassword);
 
 
         signUpTextView.setOnClickListener(new View.OnClickListener() {

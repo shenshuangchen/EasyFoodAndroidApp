@@ -18,7 +18,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
     private Button btnResetPassword;
     private Button btnBack;
     private FirebaseAuth mAuth;
-    protected Button forgetPasswordButton;
+
 
 
 
@@ -30,8 +30,6 @@ public class ResetPasswordActivity extends AppCompatActivity {
         edtEmail = (EditText) findViewById(R.id.edt_reset_email);
         btnResetPassword = (Button) findViewById(R.id.btn_reset_password);
         btnBack = (Button) findViewById(R.id.btn_back);
-        forgetPasswordButton = (Button)findViewById(R.id.forgetPassword);
-
 
         mAuth = FirebaseAuth.getInstance();
 
