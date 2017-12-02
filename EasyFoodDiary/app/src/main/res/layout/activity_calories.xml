@@ -4,7 +4,10 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1"
+
     tools:context="cis350.upenn.edu.easyfooddiary.CaloriesActivity">
+   
+
 
 
     <LinearLayout
@@ -14,6 +17,7 @@
         android:paddingTop="56dp"
         android:paddingLeft="24dp"
         android:paddingRight="24dp">
+
 
         <!--<ImageView android:src="@drawable/logo"
            android:layout_width="55dp"
@@ -162,6 +166,7 @@
             android:textColor="@color/iron"
             android:hint="% of Fat"/>
     </android.support.design.widget.TextInputLayout>-->
+
 
      <RelativeLayout
 
