@@ -57,6 +57,14 @@
             android:label="VitalsActivity"
             android:theme="@style/AppTheme.Dark" />
         <activity
+            android:name=".CaloriesActivity"
+            android:label="CaloriesActivity"
+            android:theme="@style/AppTheme.Dark" />
+        <activity
+            android:name=".LineChartActivity"
+            android:label="LineChartActivity"
+            android:theme="@style/AppTheme.Dark" />
+        <activity
             android:name=".FitnessActivity"
             android:label="FitnessActivity"
             android:theme="@style/AppTheme.Dark" />
