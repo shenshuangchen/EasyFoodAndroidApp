@@ -22,7 +22,6 @@ import org.json.JSONException;
 public class CaloriesActivity extends AppCompatActivity {
 
     private static final String TAG = "kaluli";
-    //我目前的想法是，弄出7个entry，然后print out一个line chart，这七个entry都给id，并且保存在firebase上面。
     protected CaloriesView caloriesView;
     protected JSONArray info;
     protected Calories col = new Calories();
@@ -41,7 +40,7 @@ public class CaloriesActivity extends AppCompatActivity {
 
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calories);//一旦启动，设置activity_calories layout
+        setContentView(R.layout.activity_calories);
         caloriesView = new CaloriesView(this);
         final TextView myView = (TextView) findViewById(R.id.textView);
         //FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -110,7 +109,7 @@ public class CaloriesActivity extends AppCompatActivity {
         col.setCaloriesSun(editText_caloriesSun.getText().toString());
     }
 
-    protected void onClick(View view) {
+    public void onClick(View view) {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference myref_calories = FirebaseDatabase.getInstance().getReference("calories");

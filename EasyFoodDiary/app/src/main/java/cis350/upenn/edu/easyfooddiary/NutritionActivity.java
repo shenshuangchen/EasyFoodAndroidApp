@@ -90,7 +90,7 @@ public class NutritionActivity extends AppCompatActivity {
         ntr.setFat(editText_fat.getText().toString());
     }
 
-    protected void onClick(View view) {
+    public void onClick2(View view) {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference myref_nutrition = FirebaseDatabase.getInstance().getReference("nutrition");
