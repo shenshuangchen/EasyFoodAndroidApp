@@ -4,7 +4,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1"
-    tools:context="cis350.upenn.edu.easyfooddiary.InformationActivity">
+    tools:context="cis350.upenn.edu.easyfooddiary.NutritionActivity">
 
 
     <LinearLayout
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="56dp"
         android:paddingLeft="24dp"
-        android:paddingRight="24dp">
+        android:paddingRight="24dp">nutrition
 
         <ImageView android:src="@drawable/logo"
             android:layout_width="75dp"
@@ -82,14 +82,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation = "horizontal">
-            <Button
+            <android.support.v7.widget.AppCompatButton
                 android:id="@+id/Save"
                 android:layout_width="145dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
 
                 android:padding="12dp"
-                android:onClick="onClick"
+                android:onClick="onClick2"
                 android:text="Save"/>
 
             <android.support.v7.widget.AppCompatButton
@@ -99,7 +99,7 @@
                 android:layout_marginTop="24dp"
 
                 android:padding="12dp"
-                android:onClick="onClick"
+                android:onClick="onClick2"
                 android:text="Macro Goals"
                 android:layout_alignParentRight="true"/>
         </RelativeLayout>
@@ -110,7 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:padding="12dp"
-            android:onClick="onClick"
+            android:onClick="onClick2"
             android:text="Display Macro Goals Distribution" />
 
 
