@@ -62,12 +62,24 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        else if (view.getId() == R.id.sleep) {
+       /* else if (view.getId() == R.id.sleep) {
             Intent i = new Intent(this, CalendarActivity.class);
             i.putExtra("Type","sleep");
             startActivity(i);
 
-        }else if(view.getId() == R.id.UserProfile){
+        } */
+
+
+        else if (view.getId() == R.id.sleep) {
+            Intent i = new Intent(this, SleepActivity.class);//start sleepactivity directly
+            i.putExtra("Type","sleep");
+            startActivity(i);
+
+        }
+
+
+
+        else if(view.getId() == R.id.UserProfile){
             Intent i = new Intent(this, ProfileActivity.class);
             startActivity(i);
 
