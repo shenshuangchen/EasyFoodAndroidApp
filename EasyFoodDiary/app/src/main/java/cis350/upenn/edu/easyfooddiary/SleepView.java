@@ -5,12 +5,10 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 
 /**
- * Created by vamsee on 4/27/17.
+ * Created by jiachenwang on 11/20/17.
  */
 
-public class SleepView extends TextView{
-
-    protected String bedtime, hours;
+public class SleepView extends TextView {
 
     public SleepView(Context c) {
         super(c);
@@ -19,4 +17,5 @@ public class SleepView extends TextView{
     public SleepView(Context c, AttributeSet a) {
         super(c, a);
     }
+
 }

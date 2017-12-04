@@ -65,6 +65,10 @@
             android:label="LineChartActivity"
             android:theme="@style/AppTheme.Dark" />
         <activity
+            android:name=".LineChartActivitySleep"
+            android:label="LineChartActivitySleep"
+            android:theme="@style/AppTheme.Dark" />
+        <activity
             android:name=".FitnessActivity"
             android:label="FitnessActivity"
             android:theme="@style/AppTheme.Dark" />
@@ -104,11 +108,7 @@
             android:name=".ResetPasswordActivity"
             android:label="ResetPasswordActivity"
             android:theme="@style/AppTheme.Dark" />
-        <activity
-            android:name=".UsernameActivity"
-            android:theme="@style/AppTheme.Dark"
-            android:label="UsernameActivity"
-            />
+        <activity android:name=".UsernameActivity"></activity>
     </application>
 
 </manifest>
