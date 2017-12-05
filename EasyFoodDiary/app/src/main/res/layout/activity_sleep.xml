@@ -135,7 +135,7 @@
                 android:layout_marginBottom="3dp"
                 android:onClick="onClick3"
                 android:padding="3dp"
-                android:text="Distribution" />
+                android:text="Distribute" />
         </RelativeLayout>
 
 
