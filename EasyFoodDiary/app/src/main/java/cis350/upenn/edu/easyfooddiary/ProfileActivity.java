@@ -98,7 +98,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         //displaying logged in user name
         textViewUserEmail = (TextView) findViewById(R.id.textViewUserEmail);
 
-        DatabaseReference ndbr= FirebaseDatabase.getInstance().getReference("name");
+        DatabaseReference ndbr= FirebaseDatabase.getInstance().getReference("name").child(user.getUid());
         ndbr.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -116,7 +116,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             }
         });
 
-        DatabaseReference edbr= FirebaseDatabase.getInstance().getReference("egoal");
+        DatabaseReference edbr= FirebaseDatabase.getInstance().getReference("egoal").child(user.getUid());
         edbr.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -133,7 +133,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 Log.w("tag", "Failed to read value.", error.toException());
             }
         });
-        DatabaseReference wdbr= FirebaseDatabase.getInstance().getReference("wgoal");
+        DatabaseReference wdbr= FirebaseDatabase.getInstance().getReference("wgoal").child(user.getUid());
         wdbr.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

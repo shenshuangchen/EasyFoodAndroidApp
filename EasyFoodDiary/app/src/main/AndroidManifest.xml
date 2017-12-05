@@ -108,7 +108,9 @@
             android:name=".ResetPasswordActivity"
             android:label="ResetPasswordActivity"
             android:theme="@style/AppTheme.Dark" />
-        <activity android:name=".UsernameActivity"></activity>
+        <activity android:name=".UsernameActivity"
+            android:theme="@style/AppTheme.Dark"
+            android:label="UsernameActivity"/>
     </application>
 
 </manifest>
