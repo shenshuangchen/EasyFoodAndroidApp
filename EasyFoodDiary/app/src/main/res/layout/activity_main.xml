@@ -164,7 +164,7 @@
                 android:layout_height="85dp"
                 android:onClick="onClick"
                 android:padding="12dp"
-                android:text="Calories"
+                android:text="Calor"
                 weight = "1"/>
 
         </LinearLayout>

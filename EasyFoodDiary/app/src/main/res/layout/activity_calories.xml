@@ -191,7 +191,7 @@
 
              android:padding="3dp"
              android:onClick="onClick"
-             android:text="Distribution"
+             android:text="Distribute"
              android:layout_alignParentRight="true"/>
      </RelativeLayout>
 
