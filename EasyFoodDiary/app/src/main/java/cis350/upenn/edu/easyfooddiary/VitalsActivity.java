@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -47,8 +49,12 @@ public class VitalsActivity extends AppCompatActivity {
         vitalsView = new VitalsView(this);
         date = getIntent().getExtras().getString("DATE");
         monthyear = getIntent().getExtras().getString("MONTHYEAR");
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myref_date = database.getReference(date + "v");
+        DatabaseReference myref_date = database.getReference(date + "v").child(user.getUid());;
+
+
+
         myref_date.addValueEventListener(new ValueEventListener() {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String s = dataSnapshot.getValue(String.class);
@@ -83,6 +89,7 @@ public class VitalsActivity extends AppCompatActivity {
     }
 
     public void onClick(View view) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myref_date = database.getReference(date + "v");
 
@@ -104,7 +111,7 @@ public class VitalsActivity extends AppCompatActivity {
             dateInfo.put(2, bloodPressureD);
             dateInfo.put(3, bodyTemperature);
             dateInfo.put(4, respiratoryRate);
-            myref_date.setValue(dateInfo.toString());
+            myref_date.child(user.getUid()).setValue(dateInfo.toString());
             Toast.makeText(vitalsView.getContext(),
                     "Saved", Toast.LENGTH_SHORT).show();
             Intent i = new Intent(this, CalendarActivity.class);
